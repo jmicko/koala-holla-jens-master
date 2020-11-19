@@ -6,4 +6,3 @@ CREATE TABLE koala(
 	transfer VARCHAR (1) NOT NULL,
 	notes VARCHAR (100) NOT NULL
 );
-
