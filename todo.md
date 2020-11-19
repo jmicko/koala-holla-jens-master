@@ -1,12 +1,21 @@
-Ability to add Koala to database
-	-input fields
-		name, age, gender, transfer, notes, button
-Save the koala in the database
- -on submit 
-Render to dom
- - table to hold all info
- -same info as input fields
+- [] Routes
+	- [] GET route
+		- [] koala table from db
+		- [] send to client
+	- [] PUT route
+		- [] update ready_for_transfer status
+	- [] POST route
+		- [] save koala in the DB 
+		- [] get koala info from input fields
 
-Mark them for transfer
- -Needs button only if they have not set to true 
+- [] CLIENT
+	- [] capture inputs, store in object on submit button
+	- [] send object to DB
+	- [] render all Koalas onto DOM into table provided
+	- [] button to mark them for transfer
+		- [] button only shows up if they have not already been marked for transfer
+
+- [] CSS
+	- [] do some styling
+	 
 
