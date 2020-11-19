@@ -1,0 +1,29 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: aquamarine;
+}
+
+.container{
+    display: flexbox;
+    background-color: white;
+    width: max-content;
+    margin: 1rem auto;
+    padding: 2rem;
+    min-height: 100vh;
+    border-radius: .5rem;
+}
+
+img{
+    align-self: center;
+}
+
+table, th, td{
+    border: black 2px solid;
+    border-collapse: collapse;
+}
+
+table{
+    min-width: 100%;
+}
+
