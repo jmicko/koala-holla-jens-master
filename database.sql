@@ -3,6 +3,6 @@ CREATE TABLE koala(
 	name VARCHAR (250) NOT NULL,
 	gender VARCHAR (1) NOT NULL,
 	age SMALLINT NOT NULL,
-	transfer VARCHAR (1) NOT NULL,
+	transfer VARCHAR (15) NOT NULL,
 	notes VARCHAR (100) NOT NULL
 );
