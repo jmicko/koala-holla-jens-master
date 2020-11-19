@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 
@@ -18,7 +17,19 @@ router.get('/', (req, res) => {
 })
 
 // POST
-
+router.post('/', (req, res) => {
+    let newKoala = req.body;
+    console.log('Adding new Koala to table...', newKoala);
+    let sqlText = `INSERT INTO koala (name, gender, age, transfer, notes)
+                    VALUES ($1, $2, $3, $4,	$5);`;
+    pool.query(sqlText, [newKoala.name, newKoala.gender, newKoala.age, newKoala.transfer, newKoala.notes])
+        .then(result => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log(`Error adding new koala`, error);
+            res.sendStatus(500);
+        });
+})
 
 // PUT
 router.put('/:koalaId', (req, res) => {
@@ -26,14 +37,14 @@ router.put('/:koalaId', (req, res) => {
     let transfer = req.body.transfer;
     console.log(`Updating koala with id=${id} transfer status to ${transfer}`);
     let sqlText = ``;
-    if (transfer.toLowerCase() === 'y'){
+    if (transfer.toLowerCase() === 'y') {
         sqlText = `UPDATE koala SET transfer='Y' WHERE id=$1;`
-    } 
-    pool.query( sqlText, [id] )
-        .then( (result) => {
+    }
+    pool.query(sqlText, [id])
+        .then((result) => {
             res.sendStatus(200);
         })
-        .catch( (error) => {
+        .catch((error) => {
             console.log('Error from db:', error);
             res.sendStatus(500);
         })
@@ -44,13 +55,13 @@ router.delete('/:koalaId', (req, res) => {
     let id = req.params.koalaId;
     let sqlText = `DELETE FROM koala WHERE id=$1;`;
     pool.query(sqlText, [id])
-    .then((result) => {
-        res.sendStatus(200);   
-    })
-    .catch((error) => {
-        console.error('Error from db: ', error);
-        res.sendStatus(500);
-    })
+        .then((result) => {
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.error('Error from db: ', error);
+            res.sendStatus(500);
+        })
 })
 
 module.exports = router;
