@@ -1,7 +1,7 @@
-console.log( 'js' );
+console.log('js');
 
-$( document ).ready( function(){
-  console.log( 'JQ' );
+$(document).ready(function () {
+  console.log('JQ');
   // Establish Click Listeners
   setupClickListeners()
   // load existing koalas on page load
@@ -10,8 +10,8 @@ $( document ).ready( function(){
 }); // end doc ready
 
 function setupClickListeners() {
-  $( '#addButton' ).on( 'click', function(){
-    console.log( 'in addButton on click' );
+  $('#addButton').on('click', function () {
+    console.log('in addButton on click');
     // get user input and put in an object
     // NOT WORKING YET :(
     // using a test object
@@ -23,18 +23,43 @@ function setupClickListeners() {
       notes: 'testName',
     };
     // call saveKoala with the new obejct
-    saveKoala( koalaToSend );
-  }); 
+    saveKoala(koalaToSend);
+  });
 }
 
-function getKoalas(){
-  console.log( 'in getKoalas' );
+function getKoalas() {
+  console.log('in getKoalas');
   // ajax call to server to get koalas
-  
+
 } // end getKoalas
 
-function saveKoala( newKoala ){
-  console.log( 'in saveKoala', newKoala );
+function saveKoala(newKoala) {
+  console.log('in saveKoala', newKoala);
   // ajax call to server to get koalas
- 
+
+}
+
+function deleteKoala() {
+  console.log('Deleting song...');
+  let koalaId = $(this).closest('tr').data('id');
+  $.ajax({
+    method: 'DELETE',
+    url: `/koala/${koalaId}` //add id to the url
+  }).then(function (response) {
+    //getKoalas();
+  }).catch(function (error) {
+    console.log('Error:', error);
+    alert('Something bad happened. Try again later');
+  })
+}
+
+function transferKoala() {
+  $.ajax({
+    method: 'PUT',
+    url: `koala/${id}`,
+  }).then(function (response) {
+    //refreshKoala();
+  }).catch(function (error) {
+    console.error('Error:', error);
+  })
 }
