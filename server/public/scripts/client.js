@@ -9,16 +9,15 @@ $(document).ready(function () {
 }); // end doc ready
 
 function setupClickListeners() {
+  $('#viewKoalas').on('click', '.btn-delete', deleteKoala);
+  $('#viewKoalas').on('click', '.btn-transfer', transferKoala);
   $('#addButton').on('click', function () {
     console.log('in addButton on click');
-    // get user input and put in an object
-    // NOT WORKING YET :(
-    // using a test object
     let koalaToSend = {
       name: $('#nameIn').val(),
       age: $('#ageIn').val(),
       gender: $('#genderIn').val(),
-      readyForTransfer: $('#readyForTransferIn').val(),
+      transfer: $('#readyForTransferIn').val(),
       notes: $('#notesIn').val(),
     };
     // call saveKoala with the new obejct
@@ -81,7 +80,7 @@ function deleteKoala() {
     method: 'DELETE',
     url: `/koala/${koalaId}` //add id to the url
   }).then(function (response) {
-    //getKoalas();
+    getKoalas();
   }).catch(function (error) {
     console.log('Error:', error);
     alert('Something bad happened. Try again later');
@@ -89,11 +88,15 @@ function deleteKoala() {
 }
 
 function transferKoala() {
+  let id = $(this).closest('tr').data('id');
+  let koalaTransfer = $(this).closest('tr').data('koala');
+  console.log(koalaTransfer.transfer, id);
   $.ajax({
     method: 'PUT',
     url: `koala/${id}`,
+    data: koalaTransfer
   }).then(function (response) {
-    //refreshKoala();
+    getKoalas();
   }).catch(function (error) {
     console.error('Error:', error);
   })
