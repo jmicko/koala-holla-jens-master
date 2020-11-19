@@ -74,8 +74,17 @@ function renderKoala(koalas) {
 
 
 function deleteKoala() {
-  console.log('Deleting song...');
+  console.log('Deleting koala...');
   let koalaId = $(this).closest('tr').data('id');
+  swal({
+    title: 'Confirm',
+    text: 'Are you sure to get rid of this koala?',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, sir',
+    cancelButtonText: 'Not at all'
+  }).then((result) => { 
+  if (result.isConfirmed) {
   $.ajax({
     method: 'DELETE',
     url: `/koala/${koalaId}` //add id to the url
@@ -84,7 +93,9 @@ function deleteKoala() {
   }).catch(function (error) {
     console.log('Error:', error);
     alert('Something bad happened. Try again later');
-  })
+  })} else {
+    sweetAlert('Oops!', 'Something went wrong.', 'Error')
+  }})
 }
 
 function transferKoala() {
