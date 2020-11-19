@@ -17,11 +17,11 @@
       </header>
       <section id="addKoala">
         <h2>Add Koala</h2>
-        <input type="text" id="nameIn" value="" placeholder="Name">
-        <input type="text" id="ageIn" value="" placeholder="Age">
-        <input type="text" id="genderIn" value="" placeholder="Gender">
-        <input type="text" id="readyForTransferIn" value="" placeholder="Transfer">
-        <input type="text" id="notesIn" value="" placeholder="Notes">
+        <input type="text" id="nameIn" pattern="[A-Za-z]{20}" required="required" placeholder="Name">
+        <input type="text" id="ageIn"  pattern="[0-9]{2}" required="required" placeholder="Age">
+        <input type="text" id="genderIn" pattern="[M|m|F|f]{1}" required="required"  placeholder="Gender">
+        <input type="text" id="readyForTransferIn" pattern="TRUE|FALSE|true|false" required="required" placeholder="Transfer">
+        <input type="text" id="notesIn" pattern="[A-Za-z]{50}" required="required" placeholder="Notes">
         <button type="button" id="addButton">Add Koala</button>
       </section>
       <section>
