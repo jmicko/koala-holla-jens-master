@@ -6,7 +6,6 @@ $(document).ready(function () {
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
-
 }); // end doc ready
 
 function setupClickListeners() {
@@ -24,6 +23,7 @@ function setupClickListeners() {
     };
     // call saveKoala with the new obejct
     saveKoala(koalaToSend);
+    renderKoala(koalaToSend);
   });
 }
 
@@ -38,6 +38,22 @@ function saveKoala(newKoala) {
   // ajax call to server to get koalas
 
 }
+
+function renderKoala(koalas) {
+  $('#viewKoalas').empty();
+  for (let i = 0; i < koalas.length; i += 1) {
+    let koala = koalas[i];
+    // For each koala, append a new row to our table
+    let $tr = $(`<tr data-id='${koala.id}'</tr>`);
+    $tr.data('koala', koala);
+    $tr.append(`<td data-name='${koala.name}'>${koala.name}</td>`);
+    $tr.append(`<td data-transfer='${koala.transfer}'>${koala.transfer}</td>`);
+    $tr.append(`<td><button class='btn-delete'>Delete</button></td>`)
+    $tr.append(`<td><button class='btn-transfer'>Make For Transfer</button></td>`)
+    $('#viewKoalas').append($tr);
+  }
+}
+
 
 function deleteKoala() {
   console.log('Deleting song...');
