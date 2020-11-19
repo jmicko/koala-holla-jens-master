@@ -61,13 +61,13 @@ function renderKoala(koalas) {
     // For each koala, append a new row to our table
     let $tr = $(`<tr data-id='${koala.id}'</tr>`);
     $tr.data('koala', koala);
-    $tr.append(`<td data-name='${koala.name}'>${koala.name}</td>`);
-    $tr.append(`<td>${koala.age}</td>`)
-    $tr.append(`<td>${koala.gender}</td>`)
-    $tr.append(`<td data-transfer='${koala.transfer}'>${koala.transfer}</td>`);
-    $tr.append(`<td>${koala.notes}</td>`)
-    $tr.append(`<td><button class='btn-transfer'>Make For Transfer</button></td>`)
-    $tr.append(`<td><button class='btn-delete'>Delete</button></td>`)
+    $tr.append(`<td class="name" data-name='${koala.name}'>${koala.name}</td>`);
+    $tr.append(`<td class="age">${koala.age}</td>`)
+    $tr.append(`<td class="gender">${koala.gender}</td>`)
+    $tr.append(`<td class="transfer" data-transfer='${koala.transfer}'>${koala.transfer}</td>`);
+    $tr.append(`<td class="notes">${koala.notes}</td>`)
+    $tr.append(`<td class="td-transfer"><button class='btn-transfer'>Make For Transfer</button></td>`)
+    $tr.append(`<td class="td-delete"><button class='btn-delete'>Delete</button></td>`)
     $('#viewKoalas').append($tr);
   }
 }
