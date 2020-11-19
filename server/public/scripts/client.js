@@ -29,13 +29,30 @@ function setupClickListeners() {
 
 function getKoalas() {
   console.log('in getKoalas');
-  // ajax call to server to get koalas
+  $.ajax({
+    method: 'GET',
+    url: '/koala'
+  }).then(function (response) {
+    renderKoala();
+  }).catch(function (error) {
+    console.log('error in GET', error);
+  });
 
 } // end getKoalas
 
 function saveKoala(newKoala) {
   console.log('in saveKoala', newKoala);
   // ajax call to server to get koalas
+  $.ajax({
+    method: 'POST',
+    url: '/koala',
+    data: newKoala
+  }).then(function (response) {
+    getKoalas();
+  }).catch(function (error) {
+    console.log('Error in POST', error);
+    alert('Unable to add koala at this time. Please try again later.');
+  });
 
 }
 
