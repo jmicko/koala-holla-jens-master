@@ -1,4 +1,4 @@
-Ability to add Kala to database
+Ability to add Koala to database
 	-input fields
 		name, age, gender, transfer, notes, button
 Save the koala in the database
