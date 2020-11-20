@@ -65,10 +65,6 @@ th, td{
     margin: 0;
 }
 
-.td-delete, .td-transfer{
-    border-left: none;
-}
-
 table{
     border-collapse: collapse;
 }
@@ -90,19 +86,10 @@ button{
     height: 2.5rem;
 }
 
-/* .name{
-    grid-column-start: 1;
+td.name, td.age, td.gender, td.transfer, td.notes{
+    padding: .8rem;
 }
 
-.age{
-    grid-column-start: 2;
-}
-
-.gender{
-    grid-column-start: 3;
-}
-
-.transfer{
-    grid-column-start: 4;
+/* .notes{
+    padd
 } */
-
