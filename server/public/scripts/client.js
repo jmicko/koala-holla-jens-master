@@ -3,14 +3,18 @@ console.log('js');
 $(document).ready(function () {
   console.log('JQ');
   // Establish Click Listeners
-  setupClickListeners()
+  setupClickListeners();
   // load existing koalas on page load
   getKoalas();
 }); // end doc ready
 
 function setupClickListeners() {
   $('#viewKoalas').on('click', '.btn-delete', deleteKoala);
-  $('#viewKoalas').on('click', '.btn-transfer', transferKoala);
+  $('#viewKoalas').on(
+    'click',
+    '.btn-transfer',
+    transferKoala
+  );
   $('#addButton').on('click', function () {
     console.log('in addButton on click');
     let koalaToSend = {
@@ -29,13 +33,14 @@ function getKoalas() {
   console.log('in getKoalas');
   $.ajax({
     method: 'GET',
-    url: '/koala'
-  }).then(function (response) {
-    renderKoala(response);
-  }).catch(function (error) {
-    console.log('error in GET', error);
-  });
-
+    url: '/koala',
+  })
+    .then(function (response) {
+      renderKoala(response);
+    })
+    .catch(function (error) {
+      console.log('error in GET', error);
+    });
 } // end getKoalas
 
 function saveKoala(newKoala) {
@@ -44,52 +49,72 @@ function saveKoala(newKoala) {
   $.ajax({
     method: 'POST',
     url: '/koala',
-    data: newKoala
-  }).then(function (response) {
-    getKoalas();
-  }).catch(function (error) {
-    console.log('Error in POST', error);
-    alert('Unable to add koala at this time. Please try again later.');
-  });
-
+    data: newKoala,
+  })
+    .then(function (response) {
+      getKoalas();
+    })
+    .catch(function (error) {
+      console.log('Error in POST', error);
+      alert(
+        'Unable to add koala at this time. Please try again later.'
+      );
+    });
 }
 
 function renderKoala(koalas) {
   $('#viewKoalas').empty();
   for (let i = 0; i < koalas.length; i += 1) {
     let koala = koalas[i];
+    let transferStatus = `${koala.transfer}`;
     // For each koala, append a new row to our table
     let $tr = $(`<tr data-id='${koala.id}'</tr>`);
     $tr.data('koala', koala);
-    $tr.append(`<td class="name" data-name='${koala.name}'>${koala.name}</td>`);
-    $tr.append(`<td class="age">${koala.age}</td>`)
-    $tr.append(`<td class="gender">${koala.gender}</td>`)
-    $tr.append(`<td class="transfer" data-transfer='${koala.transfer}'>${koala.transfer}</td>`);
-    $tr.append(`<td class="notes">${koala.notes}</td>`)
-    $tr.append(`<td class="td-transfer"><button class='btn-transfer'>Make For Transfer</button></td>`)
-    $tr.append(`<td class="td-delete"><button class='btn-delete'>Delete</button></td>`)
+    $tr.append(
+      `<td class="name" data-name='${koala.name}'>${koala.name}</td>`
+    );
+    $tr.append(`<td class="age">${koala.age}</td>`);
+    $tr.append(`<td class="gender">${koala.gender}</td>`);
+    $tr.append(
+      `<td class="transfer" data-transfer='${koala.transfer}'>${koala.transfer}</td>`
+    );
+    $tr.append(`<td class="notes">${koala.notes}</td>`);
+    if (transferStatus.toLowerCase() === 'false') {
+      $tr.append(
+        `<td class="td-transfer"><button class='btn-transfer'>Make For Transfer</button></td>`
+      );
+    }
+    $tr.append(
+      `<td class="td-delete"><button class='btn-delete'>Delete</button></td>`
+    );
     $('#viewKoalas').append($tr);
   }
 }
 
-
 function deleteKoala() {
   console.log('Deleting koala...');
   let koalaId = $(this).closest('tr').data('id');
-  swal('Confirm', 'Are you sure you want to get rid of this koala?', 'warning'
-  ).then((isConfirm) => { 
-  if (isConfirm) {
-  $.ajax({
-    method: 'DELETE',
-    url: `/koala/${koalaId}` //add id to the url
-  }).then(function (response) {
-    getKoalas();
-  }).catch(function (error) {
-    console.log('Error:', error);
-    alert('Something bad happened. Try again later');
-  })} else {
-    sweetAlert('Oops!', 'Something went wrong.', 'Error')
-  }})
+  swal(
+    'Confirm',
+    'Are you sure you want to get rid of this koala?',
+    'warning'
+  ).then((isConfirm) => {
+    if (isConfirm) {
+      $.ajax({
+        method: 'DELETE',
+        url: `/koala/${koalaId}`, //add id to the url
+      })
+        .then(function (response) {
+          getKoalas();
+        })
+        .catch(function (error) {
+          console.log('Error:', error);
+          alert('Something bad happened. Try again later');
+        });
+    } else {
+      sweetAlert('Oops!', 'Something went wrong.', 'Error');
+    }
+  });
 }
 
 function transferKoala() {
@@ -99,10 +124,12 @@ function transferKoala() {
   $.ajax({
     method: 'PUT',
     url: `koala/${id}`,
-    data: koalaTransfer
-  }).then(function (response) {
-    getKoalas();
-  }).catch(function (error) {
-    console.error('Error:', error);
+    data: koalaTransfer,
   })
+    .then(function (response) {
+      getKoalas();
+    })
+    .catch(function (error) {
+      console.error('Error:', error);
+    });
 }
