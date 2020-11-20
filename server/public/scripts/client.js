@@ -76,15 +76,9 @@ function renderKoala(koalas) {
 function deleteKoala() {
   console.log('Deleting koala...');
   let koalaId = $(this).closest('tr').data('id');
-  swal({
-    title: 'Confirm',
-    text: 'Are you sure to get rid of this koala?',
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, sir',
-    cancelButtonText: 'Not at all'
-  }).then((result) => { 
-  if (result.isConfirmed) {
+  swal('Confirm', 'Are you sure you want to get rid of this koala?', 'warning'
+  ).then((isConfirm) => { 
+  if (isConfirm) {
   $.ajax({
     method: 'DELETE',
     url: `/koala/${koalaId}` //add id to the url
