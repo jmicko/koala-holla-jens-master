@@ -9,6 +9,7 @@ $(document).ready(function () {
 }); // end doc ready
 
 function setupClickListeners() {
+  $("#searchKoalaBtn").on("click", searchKoala);
   $('#viewKoalas').on('click', '.btn-delete', deleteKoala);
   $('#viewKoalas').on(
     'click',
@@ -26,6 +27,15 @@ function setupClickListeners() {
     };
     // call saveKoala with the new obejct
     saveKoala(koalaToSend);
+  });
+}
+
+function searchKoala() {
+  let value = $('#koalaSearchBox').val().toLowerCase();
+  console.log(value);
+  $("#viewKoalas").filter(function() {
+    console.log(value);
+    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
   });
 }
 
