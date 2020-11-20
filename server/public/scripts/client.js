@@ -9,7 +9,11 @@ $(document).ready(function () {
 }); // end doc ready
 
 function setupClickListeners() {
-  $("#searchKoalaBtn").on("click", searchKoala);
+  $('#searchKoalaBtn').on('click', searchKoala);
+  $('#clearSearch').on('click', function () {
+    $('#koalaSearchBox').val('');
+    getKoalas();
+  });
   $('#viewKoalas').on('click', '.btn-delete', deleteKoala);
   $('#viewKoalas').on(
     'click',
@@ -33,9 +37,11 @@ function setupClickListeners() {
 function searchKoala() {
   let value = $('#koalaSearchBox').val().toLowerCase();
   console.log(value);
-  $("#viewKoalas").filter(function() {
+  $('#viewKoalas tr').filter(function () {
     console.log(value);
-    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $(this).toggle(
+      $(this).text().toLowerCase().indexOf(value) > -1
+    );
   });
 }
 
