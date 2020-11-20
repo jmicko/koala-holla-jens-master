@@ -12,7 +12,7 @@ Our client, Koala Holla (1976 Llama Comma Drive, Walla Walla WA) is a non-profit
 
 ## Description
 
-Duration:4 hours
+Duration: 4 hours
 
 This is a website to hold Koalas in a database to track details about them and track current Koalas.
 
@@ -47,24 +47,27 @@ You'll need to create a database called `koalas`.
 Use the provided `database.sql` file to create the `koala` table and setup some test data.
 
 ##Sample pool.js
+
+```javascript
 const pg = require('pg');
 const Pool = pg.Pool;
 
 const pool = new Pool({
-database: 'koalas', // name of our database
-host: 'localhost', // where is your database?
-port: 5432, // this is the default port
-max: 10, // number of connections
-idleTimeoutMillis: 10000 // 10 seconds
+  database: 'koalas', // name of our database
+  host: 'localhost', // where is your database?
+  port: 5432, // this is the default port
+  max: 10, // number of connections
+  idleTimeoutMillis: 10000, // 10 seconds
 });
 
 // When we connect to the database, run a function
 pool.on('connect', () => {
-console.log(`Connected to database...`);
-})
+  console.log(`Connected to database...`);
+});
 
 pool.on('error', (error) => {
-console.log('Error from pg', error);
-})
+  console.log('Error from pg', error);
+});
 
 module.exports = pool;
+```
