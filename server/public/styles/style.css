@@ -79,7 +79,7 @@ td.notes{
     text-align: left;
 }
 
-button{
+td button{
     width: 5rem;
     border-radius: .6rem;
     margin: .1rem auto;
