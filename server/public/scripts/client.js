@@ -37,7 +37,7 @@ function setupClickListeners() {
 function searchKoala() {
   let value = $('#koalaSearchBox').val().toLowerCase();
   console.log(value);
-  $('#viewKoalas tr').filter(function () {
+  $("#viewKoalas tr").filter(function() {
     console.log(value);
     $(this).toggle(
       $(this).text().toLowerCase().indexOf(value) > -1
